@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Parstagram</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="loginButton">Log in</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="emptyString" />
+</resources>
