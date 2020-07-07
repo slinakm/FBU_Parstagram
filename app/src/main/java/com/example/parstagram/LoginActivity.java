@@ -17,7 +17,7 @@ import com.parse.ParseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
-    static final String TAG = "LoginActivity";
+    private static final String TAG = "LoginActivity";
     private ActivityLoginBinding binding;
 
     @Override
@@ -52,13 +52,13 @@ public class LoginActivity extends AppCompatActivity {
                     // TODO: State whether user has wrong username/password or not
                     Log.e(TAG, "loginUser: issue with login", e);
                     Toast.makeText(LoginActivity.this,
-                            "Issue with login", Toast.LENGTH_SHORT).show();
+                            R.string.toast_login_err, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 goMainActivity();
                 // TODO: improve with material design
                 Toast.makeText(LoginActivity.this,
-                        "Success!", Toast.LENGTH_SHORT).show();
+                        R.string.toast_login_succ, Toast.LENGTH_SHORT).show();
             }
         });
     }

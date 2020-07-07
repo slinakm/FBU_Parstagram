@@ -4,6 +4,6 @@
     <color name="colorPrimaryDark">#405DE6</color>
     <color name="colorAccent">#E1306C</color>
     <color name="colorHighlight">#FCAF45</color>
-    <color name="colorLogin">#458eff</color>
-    <color name="colorWhite">#ffffff</color>
+    <color name="colorBtn">#458eff</color>
+    <color name="colorTextBtn">#ffffff</color>
 </resources>

@@ -1,10 +1,16 @@
 <resources>
     <string name="app_name">Parstagram</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_new_post">Add New Post</string>
+    <string name="title_profile">Profile</string>
     <string name="loginButton">Log in</string>
     <string name="password">Password</string>
     <string name="username">Username</string>
     <string name="emptyString" />
+    <string name="caption">Caption</string>
+    <string name="take_picture">Take Picture</string>
+    <string name="submit">Submit</string>
+    <string name="toast_login_err">Issue with login</string>
+    <string name="toast_login_succ">Success!</string>
+    <string name="toast_desc_empt">Description can not be empty</string>
 </resources>
