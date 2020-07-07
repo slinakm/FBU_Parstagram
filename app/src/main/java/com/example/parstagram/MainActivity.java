@@ -2,6 +2,7 @@ package com.example.parstagram;
 
 import android.os.Bundle;
 
+import com.example.parstagram.ui.camera.CameraFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,7 +11,8 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+        implements CameraFragment.onPostSubmissionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

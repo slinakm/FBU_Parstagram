@@ -15,7 +15,7 @@
         android:id="@+id/navigation_dashboard"
         android:name="com.example.parstagram.ui.camera.CameraFragment"
         android:label="@string/title_new_post"
-        tools:layout="@layout/camera_dashboard" />
+        tools:layout="@layout/fragment_camera" />
 
     <fragment
         android:id="@+id/navigation_notifications"

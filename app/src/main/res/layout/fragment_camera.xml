@@ -10,44 +10,43 @@
         android:id="@+id/btnCamera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="52dp"
         android:backgroundTint="@color/colorBtn"
         android:text="@string/take_picture"
         android:textColor="@color/colorTextBtn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/etDesc"
+        app:layout_constraintTop_toBottomOf="@+id/etDesc" />
 
     <EditText
-        android:id="@+id/etCaption"
+        android:id="@+id/etDesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="89dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="80dp"
         android:ems="10"
         android:hint="@string/caption"
         android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/btnCamera"
-        app:layout_constraintTop_toBottomOf="@+id/ivPost" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="92dp"
-        android:text="@string/submit"
+        android:layout_marginTop="84dp"
         android:backgroundTint="@color/colorBtn"
+        android:text="@string/submit"
         android:textColor="@color/colorTextBtn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etCaption" />
+        app:layout_constraintStart_toStartOf="@+id/etDesc"
+        app:layout_constraintTop_toBottomOf="@+id/ivPost" />
 
     <ImageView
         android:id="@+id/ivPost"
         android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginStart="8dp"
         app:layout_constraintStart_toStartOf="@+id/btnCamera"
-        app:layout_constraintTop_toBottomOf="@+id/btnCamera"
+        app:layout_constraintTop_toTopOf="@+id/btnCamera"
         tools:src="@tools:sample/avatars" />
 </androidx.constraintlayout.widget.ConstraintLayout>

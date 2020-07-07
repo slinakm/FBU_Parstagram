@@ -4,16 +4,23 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.parse.ParseFile;
+
 public class CameraViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
+    private MutableLiveData<String> description;
+    private MutableLiveData<ParseFile> image;
 
     public CameraViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
+        description = new MutableLiveData<>();
+        image = new MutableLiveData<>();
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public LiveData<String> getDescription() {
+        return description;
     }
+    public LiveData<ParseFile> getImage() {
+        return image;
+    }
+
 }

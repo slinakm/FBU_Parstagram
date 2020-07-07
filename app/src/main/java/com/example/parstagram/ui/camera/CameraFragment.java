@@ -17,7 +17,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.parstagram.MainActivity;
 import com.example.parstagram.Models.Post;
 import com.example.parstagram.R;
-import com.example.parstagram.databinding.CameraDashboardBinding;
+import com.example.parstagram.databinding.FragmentCameraBinding;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -28,30 +28,36 @@ public class CameraFragment extends Fragment {
 
     private static final String TAG = CameraFragment.class.getSimpleName();
     private CameraViewModel cameraViewModel;
-    private CameraDashboardBinding binding;
+    private FragmentCameraBinding binding;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
+    private onPostSubmissionListener listener;
+
+    public interface onPostSubmissionListener {
+//        public void onSubmitButtonClicked();
+    }
+
+    public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        binding = CameraDashboardBinding.inflate(getLayoutInflater());
+        binding = FragmentCameraBinding.inflate(getLayoutInflater());
         cameraViewModel =
                 ViewModelProviders.of(this).get(CameraViewModel.class);
 
-        queryPosts();
+        return binding.getRoot();
+    }
 
-        binding.btnSubmit.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        cameraViewModel.getDescription().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
-            public void onClick(View view) {
-                String desc = binding.etCaption.getText().toString();
-
-                if (desc.isEmpty()) {
-                    Toast.makeText(MainActivity.this, R.string.toast_desc_empt,
-                            Toast.LENGTH_SHORT).show();
-                }
+            public void onChanged(@Nullable String s) {
+                binding.etDesc.setText(s);
             }
         });
 
-        return binding.getRoot();
+        queryPosts();
     }
 
     private void queryPosts() {
