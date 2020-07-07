@@ -13,5 +13,8 @@
     <string name="toast_login_err">Issue with login</string>
     <string name="toast_login_succ">Success!</string>
     <string name="toast_desc_empt">Description can not be empty</string>
+    <string name="toast_save_err">Error while saving!</string>
+    <string name="toast_save_succ">Success!</string>
     <string name="empty_string" />
+    <string name="file_authority">com.codepath.fileprovider.Parstagram</string>
 </resources>
