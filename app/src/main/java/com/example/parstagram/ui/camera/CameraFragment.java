@@ -1,6 +1,8 @@
 package com.example.parstagram.ui.camera;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -17,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.parstagram.BitmapScaler;
 import com.example.parstagram.Models.Post;
 import com.example.parstagram.R;
 import com.example.parstagram.databinding.FragmentCameraBinding;
@@ -26,8 +29,13 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
+
+import static android.app.Activity.RESULT_OK;
 
 public class CameraFragment extends Fragment {
 
@@ -38,8 +46,8 @@ public class CameraFragment extends Fragment {
     private FragmentCameraBinding binding;
 
     private String desc;
-    private File photoFile;
-    private String photoFileName;
+    private File photoFile; // TODO: fix camera modelview
+    private final String photoFileName = "photo.jpg";
 
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -120,10 +128,45 @@ public class CameraFragment extends Fragment {
 
         if (!mediaStorageDir.exists()
                 && !mediaStorageDir.mkdirs()) {
-            Log.d(TAG, "getPhotoFileUri: ");
+            Log.d(TAG, "getPhotoFileUri: failed to create directory");
         }
 
         return new File(mediaStorageDir.getPath() + File.separator + fileName);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+            Log.d(TAG, "onActivityResult: picture taken");
+            if (resultCode == RESULT_OK) {
+                Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+
+                Bitmap resizedBitmap = BitmapScaler.scaleToFitWidth(takenImage,
+                        (int) getResources().getDimension((R.dimen.resized_post_image)));
+
+                binding.ivPost.setImageBitmap(resizedBitmap);
+                binding.ivPost.setVisibility(View.VISIBLE);
+                binding.btnCamera.setVisibility(View.GONE);
+
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 40, bytes);
+                File resizedFile = getPhotoFileUri(photoFileName + "_resized");
+
+                try {
+                    resizedFile.createNewFile();
+                    FileOutputStream fos = new FileOutputStream(resizedFile);
+                    fos.write(bytes.toByteArray());
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                Toast.makeText(getContext(), getString(R.string.toast_camera_err),
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     /**
@@ -163,10 +206,16 @@ public class CameraFragment extends Fragment {
                     Log.i(TAG, "done: Post save was successful!");
                     Toast.makeText(getContext(), getString(R.string.toast_save_succ),
                             Toast.LENGTH_SHORT).show();
-                    cameraViewModel.reset();
+                    reset();
                 }
             }
         });
+    }
+
+    private void reset() {
+        cameraViewModel.reset();
+        binding.ivPost.setVisibility(View.GONE);
+        binding.btnCamera.setVisibility(View.VISIBLE);
     }
 
 }

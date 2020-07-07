@@ -15,6 +15,7 @@
     <string name="toast_desc_empt">Description can not be empty</string>
     <string name="toast_save_err">Error while saving!</string>
     <string name="toast_save_succ">Success!</string>
+    <string name="toast_camera_err">Picture wasn\'t taken!</string>
     <string name="empty_string" />
     <string name="file_authority">com.codepath.fileprovider.Parstagram</string>
 </resources>
