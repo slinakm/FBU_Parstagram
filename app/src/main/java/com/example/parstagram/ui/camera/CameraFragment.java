@@ -19,8 +19,10 @@ import com.example.parstagram.Models.Post;
 import com.example.parstagram.R;
 import com.example.parstagram.databinding.FragmentCameraBinding;
 import com.parse.FindCallback;
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.List;
 
@@ -51,6 +53,8 @@ public class CameraFragment extends Fragment {
             }
         });
 
+        binding.btnCamera.setOnClickListener(new postSubmissionOnClickListener());
+
         queryPosts();
     }
 
@@ -70,6 +74,30 @@ public class CameraFragment extends Fragment {
                 }
             }
         });
+
+    }
+
+    private class postSubmissionOnClickListener implements View.OnClickListener {
+        public void onClick(View view) {
+            checkPostable();
+        }
+    }
+
+    private boolean checkPostable(){
+        String desc = cameraViewModel.getDescription().toString();
+        if (desc.isEmpty()) {
+            Toast.makeText(getContext(),
+                    R.string.toast_desc_empt, Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
+            ParseUser currUser = ParseUser.getCurrentUser();
+            savePost(desc, currUser);
+            return true;
+        }
+    }
+
+    private void savePost(String desc, ParseUser currUser) {
+        Post post = new Post();
 
     }
 
