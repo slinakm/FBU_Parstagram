@@ -37,11 +37,23 @@
         android:id="@+id/btnLogin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/loginButton"
+        android:layout_marginTop="@dimen/login_between_margins"
         android:backgroundTint="@color/colorBtn"
+        android:text="@string/loginButton"
         android:textColor="@color/colorTextBtn"
-        app:layout_constraintTop_toBottomOf="@id/etPassword"
         app:layout_constraintEnd_toEndOf="@+id/etPassword"
         app:layout_constraintStart_toStartOf="@+id/etPassword"
-        android:layout_marginTop="@dimen/login_between_margins" />
+        app:layout_constraintTop_toBottomOf="@id/etPassword" />
+
+    <Button
+        android:id="@+id/btnLogin2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/login_between_margins"
+        android:backgroundTint="@color/colorBtnSignUp"
+        android:text="@string/signUpButton"
+        android:textColor="@color/colorTextBtn"
+        app:layout_constraintEnd_toEndOf="@+id/etPassword"
+        app:layout_constraintStart_toStartOf="@+id/etPassword"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,6 +4,7 @@
     <string name="title_new_post">Add New Post</string>
     <string name="title_profile">Profile</string>
     <string name="loginButton">Log in</string>
+    <string name="signUpButton">Sign Up</string>
     <string name="password">Password</string>
     <string name="username">Username</string>
     <string name="emptyString" />
