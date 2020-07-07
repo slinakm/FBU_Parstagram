@@ -186,6 +186,10 @@ public class CameraFragment extends Fragment {
         if (desc.isEmpty()) {
             Toast.makeText(getContext(),
                     R.string.toast_desc_empt, Toast.LENGTH_SHORT).show();
+        } else if (photoFile == null
+                || binding.ivPost.getDrawable() == null) {
+            Toast.makeText(getContext(),
+                    R.string.toast_img_empt, Toast.LENGTH_SHORT).show();
         } else {
             ParseUser currUser = ParseUser.getCurrentUser();
             savePost(desc, currUser);
@@ -216,6 +220,7 @@ public class CameraFragment extends Fragment {
         cameraViewModel.reset();
         binding.ivPost.setVisibility(View.GONE);
         binding.btnCamera.setVisibility(View.VISIBLE);
+        photoFile = null;
     }
 
 }
