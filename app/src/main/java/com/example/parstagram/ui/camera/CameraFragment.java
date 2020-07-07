@@ -67,27 +67,6 @@ public class CameraFragment extends Fragment {
 
         binding.btnSubmit.setOnClickListener(new postSubmissionOnClickListener());
         binding.btnCamera.setOnClickListener(new cameraOnClickListener());
-
-//        queryPosts();
-    }
-
-    private void queryPosts() {
-        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
-        query.include(Post.KEY_USER);
-        query.findInBackground(new FindCallback<Post>() {
-            @Override
-            public void done(List<Post> posts, ParseException e) {
-                if (e != null) {
-                    Log.e(TAG, "queryPosts: Issue getting posts", e);
-                }
-
-                for (Post p: posts) {
-                    Log.i(TAG, "Post:" + p.getDescription()
-                            + ", User: " + p.getUser().getUsername());
-                }
-            }
-        });
-
     }
 
     private class descObserver implements Observer<String> {
