@@ -30,12 +30,6 @@ public class CameraFragment extends Fragment {
     private CameraViewModel cameraViewModel;
     private FragmentCameraBinding binding;
 
-    private onPostSubmissionListener listener;
-
-    public interface onPostSubmissionListener {
-//        public void onSubmitButtonClicked();
-    }
-
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
