@@ -4,15 +4,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.example.parstagram.MainActivity;
 import com.example.parstagram.R;
-import com.example.parstagram.ui.signup.SignupActivity;
 import com.example.parstagram.databinding.ActivityLoginBinding;
+import com.example.parstagram.ui.signup.SignupActivity;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -21,6 +24,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = LoginActivity.class.getSimpleName();
     private ActivityLoginBinding binding;
+
+    private LoginViewModel loginViewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,9 +37,29 @@ public class LoginActivity extends AppCompatActivity {
             goActivity(MainActivity.class);
         }
 
+        loginViewModel =
+        ViewModelProviders.of(this).get(LoginViewModel.class);
+
         // TODO: improve login page looks and add Instagram logo to Toolbar
+
+        loginViewModel.getUsername().observe(this, new LoginActivity.textObserver(binding.etUsername));
+        loginViewModel.getPassword().observe(this, new LoginActivity.textObserver(binding.etPassword));
+
         binding.btnLogin.setOnClickListener(new loginOnClickListener());
         binding.btnSignup.setOnClickListener(new signupOnClickListener());
+    }
+
+    private class textObserver implements Observer<String> {
+        TextView tv;
+
+        private textObserver(TextView tv) {
+            this.tv = tv;
+        }
+
+        @Override
+        public void onChanged(@Nullable String s) {
+            tv.setText(s);
+        }
     }
 
     private class signupOnClickListener implements View.OnClickListener {

@@ -40,7 +40,6 @@ public class SignupActivity extends AppCompatActivity {
 
         signupViewModel.getUsername().observe(this, new textObserver(binding.etUsername));
         signupViewModel.getPassword().observe(this, new textObserver(binding.etPassword));
-        // TODO: set up so that passwords must match
         signupViewModel.getPasswordAgain().observe(this, new textObserver(binding.etPassword2));
         signupViewModel.getEmail().observe(this, new textObserver(binding.etEmail));
     }
