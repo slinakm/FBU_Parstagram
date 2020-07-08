@@ -103,7 +103,9 @@ public class CameraFragment extends Fragment {
                 binding.ivPost.setVisibility(View.VISIBLE);
                 binding.btnCamera.setVisibility(View.GONE);
 
-                BitmapManipulation.writeResizedBitmap(getContext(), photoFileName, resizedBitmap, "resized", TAG);
+                photoFile =
+                        BitmapManipulation.writeResizedBitmap(getContext(), photoFileName,
+                        resizedBitmap, "resized", TAG);
             } else {
                 Toast.makeText(getContext(), getString(R.string.toast_camera_err),
                         Toast.LENGTH_SHORT).show();
@@ -123,6 +125,7 @@ public class CameraFragment extends Fragment {
 
     private void checkPostable(){
         Log.d(TAG, "checkPostable: description =" + desc);
+        Log.d(TAG, "checkPostable: get size of image" + photoFile.getTotalSpace());
         desc = binding.etDesc.getText().toString();
 
         if (desc.isEmpty()) {

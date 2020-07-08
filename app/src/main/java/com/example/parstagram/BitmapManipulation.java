@@ -150,11 +150,13 @@ public class BitmapManipulation {
         return new File(mediaStorageDir.getPath() + File.separator + fileName);
     }
 
-    public static void writeResizedBitmap(Context context, String photoFileName,
+    public static File writeResizedBitmap(Context context, String photoFileName,
                                           Bitmap changedBitmap, String resized, String TAG){
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         changedBitmap.compress(Bitmap.CompressFormat.JPEG, 40, bytes);
-        File resizedFile = getPhotoFileUri(context, photoFileName + "_" + resized, TAG);
+
+        String filename = photoFileName + "_" + resized;
+        File resizedFile = getPhotoFileUri(context, filename, TAG);
 
         try {
             resizedFile.createNewFile();
@@ -164,6 +166,7 @@ public class BitmapManipulation {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return resizedFile;
     }
 
 }

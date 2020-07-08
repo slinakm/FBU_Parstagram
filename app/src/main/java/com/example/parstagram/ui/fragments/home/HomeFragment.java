@@ -94,7 +94,6 @@ public class HomeFragment extends Fragment {
                 for (Post p: posts) {
                     Log.i(TAG, "Post:" + p.getDescription()
                             + ", User: " + p.getUser().getUsername());
-                    
                 }
 
                 Log.i(TAG, "done: number of posts = " + posts.size());
