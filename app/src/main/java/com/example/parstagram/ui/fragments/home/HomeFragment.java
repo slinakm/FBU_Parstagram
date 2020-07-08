@@ -1,5 +1,6 @@
 package com.example.parstagram.ui.fragments.home;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,13 +15,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.example.parstagram.BitmapManipulation;
 import com.example.parstagram.adapters.PostsAdapter;
 import com.example.parstagram.models.Post;
 import com.example.parstagram.databinding.FragmentHomeBinding;
+import com.example.parstagram.ui.fragments.camera.CameraFragment;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -88,7 +94,9 @@ public class HomeFragment extends Fragment {
                 for (Post p: posts) {
                     Log.i(TAG, "Post:" + p.getDescription()
                             + ", User: " + p.getUser().getUsername());
+                    
                 }
+
                 Log.i(TAG, "done: number of posts = " + posts.size());
 
                 adapter.clear();

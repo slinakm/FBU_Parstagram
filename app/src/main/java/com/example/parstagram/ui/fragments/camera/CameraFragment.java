@@ -1,5 +1,7 @@
 package com.example.parstagram.ui.fragments.camera;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -38,7 +40,6 @@ import static android.app.Activity.RESULT_OK;
 public class CameraFragment extends Fragment {
 
     private static final String TAG = CameraFragment.class.getSimpleName();
-    private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 42;
 
     private CameraViewModel cameraViewModel;
     private FragmentCameraBinding binding;
@@ -81,41 +82,16 @@ public class CameraFragment extends Fragment {
     private class cameraOnClickListener implements View.OnClickListener {
         public void onClick(View view) {
             Log.i(TAG, "onClick: camera button was clicked by user");
-            launchCamera();
+            BitmapManipulation.launchCamera(CameraFragment.this.getActivity(),
+                    photoFileName, photoFile, TAG);
         }
-    }
-
-    private void launchCamera() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        photoFile = getPhotoFileUri(photoFileName);
-
-        Uri fileProvider = FileProvider.getUriForFile(getContext(),
-                "com.codepath.fileprovider.Parstagram", photoFile);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
-
-        if (intent.resolveActivity(getContext().getPackageManager()) != null) {
-            startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
-        }
-    }
-
-    private File getPhotoFileUri(String fileName) {
-        File mediaStorageDir = new File(
-                getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES),
-                TAG);
-
-        if (!mediaStorageDir.exists()
-                && !mediaStorageDir.mkdirs()) {
-            Log.d(TAG, "getPhotoFileUri: failed to create directory");
-        }
-
-        return new File(mediaStorageDir.getPath() + File.separator + fileName);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+        if (requestCode == BitmapManipulation.CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
             Log.d(TAG, "onActivityResult: picture taken");
             if (resultCode == RESULT_OK) {
                 Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
@@ -127,18 +103,7 @@ public class CameraFragment extends Fragment {
                 binding.ivPost.setVisibility(View.VISIBLE);
                 binding.btnCamera.setVisibility(View.GONE);
 
-                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 40, bytes);
-                File resizedFile = getPhotoFileUri(photoFileName + "_resized");
-
-                try {
-                    resizedFile.createNewFile();
-                    FileOutputStream fos = new FileOutputStream(resizedFile);
-                    fos.write(bytes.toByteArray());
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                BitmapManipulation.writeResizedBitmap(getContext(), photoFileName, resizedBitmap, "resized", TAG);
             } else {
                 Toast.makeText(getContext(), getString(R.string.toast_camera_err),
                         Toast.LENGTH_SHORT).show();
