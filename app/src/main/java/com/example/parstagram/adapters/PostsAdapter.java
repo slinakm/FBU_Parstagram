@@ -88,6 +88,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             String username = post.getUser().getUsername();
             binding.tvUsername1.setText(username);
             binding.tvUsername2.setText(username);
+            binding.tvRelTime.setText(post.getRelativeTime());
 
             binding.tvDescription.setText(post.getDescription());
 

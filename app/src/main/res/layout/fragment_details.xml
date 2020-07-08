@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:textColor="@color/text_secondary"
-            android:paddingStart="5dp"
+            android:paddingStart="10dp"
             app:layout_constraintStart_toEndOf="@id/tvDescriptionTag"
             app:layout_constraintTop_toTopOf="@id/tvDescriptionTag"
             tools:text="description" />
