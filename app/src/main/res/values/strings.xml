@@ -29,4 +29,7 @@
     <string name="toast_signup_err">Could not sign up</string>
     <string name="empty_string" />
     <string name="file_authority">com.codepath.fileprovider.Parstagram</string>
+    <string name="description">Description: </string>
+    <string name="usernamecolon">Username: </string>
+    <string name="timestamp">Timestamp: </string>
 </resources>
