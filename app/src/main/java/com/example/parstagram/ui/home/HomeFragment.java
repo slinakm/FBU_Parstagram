@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.parstagram.adapters.PostsAdapter;
 import com.example.parstagram.models.Post;
@@ -25,6 +26,8 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
     private static final String TAG = HomeFragment.class.getSimpleName();
+    private static final int MAXIMUM_POSTS = 20;
+    private static int testingRefresh = 0;
 
     private HomeViewModel homeViewModel;
     private FragmentHomeBinding binding;
@@ -51,13 +54,32 @@ public class HomeFragment extends Fragment {
 
         rvPosts.setAdapter(adapter);
         rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        binding.swipeContainer.setOnRefreshListener(new
+                swipeRefreshListener(binding.swipeContainer));
         queryPosts();
     }
 
+    private class swipeRefreshListener implements SwipeRefreshLayout.OnRefreshListener {
+
+        SwipeRefreshLayout swipeContainer;
+
+        private swipeRefreshListener(SwipeRefreshLayout swipeContainer) {
+            this.swipeContainer = swipeContainer;
+        }
+        @Override
+        public void onRefresh() {
+            queryPosts();
+            swipeContainer.setRefreshing(false);
+            testingRefresh ++;
+        }
+    }
 
     private void queryPosts() {
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
+        query.orderByAscending("createdAt");
         query.include(Post.KEY_USER);
+        query.setLimit(MAXIMUM_POSTS);
         query.findInBackground(new FindCallback<Post>() {
             @Override
             public void done(List<Post> posts, ParseException e) {
@@ -69,9 +91,12 @@ public class HomeFragment extends Fragment {
                     Log.i(TAG, "Post:" + p.getDescription()
                             + ", User: " + p.getUser().getUsername());
                 }
+                Log.i(TAG, "done: number of posts = " + posts.size());
 
-                allPosts.addAll(posts);
-                adapter.notifyDataSetChanged();
+                adapter.clear();
+                List<Post> post = new ArrayList<>();
+                post.add(posts.get(testingRefresh));
+                adapter.addAll(post);
             }
         });
 
