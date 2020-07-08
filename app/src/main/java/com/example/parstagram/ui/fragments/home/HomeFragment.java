@@ -1,4 +1,4 @@
-package com.example.parstagram.ui.home;
+package com.example.parstagram.ui.fragments.home;
 
 import android.os.Bundle;
 import android.util.Log;

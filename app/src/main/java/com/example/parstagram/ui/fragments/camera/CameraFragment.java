@@ -1,4 +1,4 @@
-package com.example.parstagram.ui.camera;
+package com.example.parstagram.ui.fragments.camera;
 
 import android.content.Intent;
 import android.graphics.Bitmap;

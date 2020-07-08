@@ -2,7 +2,6 @@ package com.example.parstagram;
 
 import android.os.Bundle;
 
-import com.example.parstagram.ui.camera.CameraFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;

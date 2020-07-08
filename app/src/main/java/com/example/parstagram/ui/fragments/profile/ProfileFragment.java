@@ -1,4 +1,4 @@
-package com.example.parstagram.ui.profile;
+package com.example.parstagram.ui.fragments.profile;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,19 +6,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.parstagram.LoginActivity;
-import com.example.parstagram.R;
+import com.example.parstagram.ui.login.LoginActivity;
 import com.example.parstagram.databinding.FragmentProfileBinding;
-import com.example.parstagram.ui.home.HomeFragment;
-import com.example.parstagram.ui.home.HomeViewModel;
 import com.parse.ParseUser;
 
 public class ProfileFragment extends Fragment {

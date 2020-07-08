@@ -1,10 +1,9 @@
-package com.example.parstagram.ui.camera;
+package com.example.parstagram.ui.fragments.camera;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.parstagram.R;
 import com.parse.ParseFile;
 
 public class CameraViewModel extends ViewModel {

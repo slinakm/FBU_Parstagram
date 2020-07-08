@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.parstagram.ui.home.HomeFragment"
+        android:name="com.example.parstagram.ui.fragments.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.parstagram.ui.camera.CameraFragment"
+        android:name="com.example.parstagram.ui.fragments.camera.CameraFragment"
         android:label="@string/title_new_post"
         tools:layout="@layout/fragment_camera" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.parstagram.ui.profile.ProfileFragment"
+        android:name="com.example.parstagram.ui.fragments.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/activity_signup" />
 </navigation>

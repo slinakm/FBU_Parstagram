@@ -1,6 +1,5 @@
-package com.example.parstagram;
+package com.example.parstagram.ui.login;
 
-import android.content.ContentProviderClient;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +9,9 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.parstagram.MainActivity;
+import com.example.parstagram.R;
+import com.example.parstagram.ui.signup.SignupActivity;
 import com.example.parstagram.databinding.ActivityLoginBinding;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
@@ -17,7 +19,7 @@ import com.parse.ParseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private static final String TAG = "LoginActivity";
+    private static final String TAG = LoginActivity.class.getSimpleName();
     private ActivityLoginBinding binding;
 
     @Override
@@ -27,19 +29,30 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         if (ParseUser.getCurrentUser() != null) {
-            goMainActivity();
+            goActivity(MainActivity.class);
         }
 
         // TODO: improve login page looks and add Instagram logo to Toolbar
-        binding.btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.i(TAG, "onClick: ");
+        binding.btnLogin.setOnClickListener(new loginOnClickListener());
+        binding.btnSignup.setOnClickListener(new signupOnClickListener());
+    }
 
-                loginUser(binding.etUsername.getText().toString(),
-                        binding.etPassword.getText().toString());
-            }
-        });
+    private class signupOnClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            Log.i(TAG, "signupOnClickListener onClick: ");
+            goActivity(SignupActivity.class);
+        }
+    }
+
+    private class loginOnClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            Log.i(TAG, "loginOnClickListener onClick: ");
+
+            loginUser(binding.etUsername.getText().toString(),
+                    binding.etPassword.getText().toString());
+        }
     }
 
     private void loginUser(String username, String password) {
@@ -55,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                             R.string.toast_login_err, Toast.LENGTH_SHORT).show();
                     return;
                 }
-                goMainActivity();
+                goActivity(MainActivity.class);
                 // TODO: improve with material design
                 Toast.makeText(LoginActivity.this,
                         R.string.toast_login_succ, Toast.LENGTH_SHORT).show();
@@ -63,9 +76,10 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void goMainActivity() {
-        Intent i = new Intent(this, MainActivity.class);
+    private void goActivity(Class c) {
+        Intent i = new Intent(this, c);
         startActivity(i);
         finish();
     }
+
 }
