@@ -5,22 +5,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.parstagram.Models.Post;
-import com.example.parstagram.R;
+import com.example.parstagram.adapters.PostsAdapter;
+import com.example.parstagram.models.Post;
 import com.example.parstagram.databinding.FragmentHomeBinding;
-import com.example.parstagram.ui.camera.CameraFragment;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
@@ -28,6 +28,10 @@ public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
     private FragmentHomeBinding binding;
+
+    private RecyclerView rvPosts;
+    private PostsAdapter adapter;
+    private final List<Post> allPosts = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -41,8 +45,15 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        rvPosts = binding.rvPosts;
+        adapter = new PostsAdapter(getActivity(), allPosts);
+
+        rvPosts.setAdapter(adapter);
+        rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
         queryPosts();
     }
+
 
     private void queryPosts() {
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
@@ -58,6 +69,9 @@ public class HomeFragment extends Fragment {
                     Log.i(TAG, "Post:" + p.getDescription()
                             + ", User: " + p.getUser().getUsername());
                 }
+
+                allPosts.addAll(posts);
+                adapter.notifyDataSetChanged();
             }
         });
 

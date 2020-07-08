@@ -1,4 +1,4 @@
-package com.example.parstagram.Models;
+package com.example.parstagram.models;
 
 import com.parse.ParseClassName;
 import com.parse.ParseFile;
@@ -15,8 +15,9 @@ public class Post extends ParseObject {
     // Set up empty constructor to register as ParseObject subclass
     public Post(){}
 
-    public Post(String desc, ParseUser user) {
+    public Post(String desc, ParseFile file, ParseUser user) {
         put(KEY_DESCRIPTION, desc);
+        put(KEY_IMAGE, file);
         put(KEY_USER, user);
     }
 

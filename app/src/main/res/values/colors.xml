@@ -5,7 +5,9 @@
     <color name="colorAccent">#E1306C</color>
     <color name="colorHighlight">#FCAF45</color>
     <color name="colorBtn">#458eff</color>
-    <color name="colorBtnSignUp">#FFDC80</color>
+    <color name="colorBtnSignUp">#60B863</color>
     <color name="colorTextBtn">#ffffff</color>
     <color name="pink">#C13584</color>
+    <color name="text_primary">#000000</color>
+    <color name="text_secondary">#606060</color>
 </resources>

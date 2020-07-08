@@ -20,12 +20,11 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.parstagram.BitmapScaler;
-import com.example.parstagram.Models.Post;
+import com.example.parstagram.models.Post;
 import com.example.parstagram.R;
 import com.example.parstagram.databinding.FragmentCameraBinding;
-import com.parse.FindCallback;
 import com.parse.ParseException;
-import com.parse.ParseQuery;
+import com.parse.ParseFile;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
@@ -33,7 +32,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -171,12 +169,12 @@ public class CameraFragment extends Fragment {
                     R.string.toast_img_empt, Toast.LENGTH_SHORT).show();
         } else {
             ParseUser currUser = ParseUser.getCurrentUser();
-            savePost(desc, currUser);
+            savePost(desc, photoFile, currUser);
         }
     }
 
-    private void savePost(String desc, ParseUser currUser) {
-        Post post = new Post(desc, currUser);
+    private void savePost(String desc, File file, ParseUser currUser) {
+        Post post = new Post(desc, new ParseFile(file), currUser);
 
         post.saveInBackground(new SaveCallback() {
             @Override
