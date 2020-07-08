@@ -27,7 +27,6 @@ import java.util.List;
 public class HomeFragment extends Fragment {
     private static final String TAG = HomeFragment.class.getSimpleName();
     private static final int MAXIMUM_POSTS = 20;
-    private static int testingRefresh = 0;
 
     private HomeViewModel homeViewModel;
     private FragmentHomeBinding binding;
@@ -71,7 +70,6 @@ public class HomeFragment extends Fragment {
         public void onRefresh() {
             queryPosts();
             swipeContainer.setRefreshing(false);
-            testingRefresh ++;
         }
     }
 
@@ -94,9 +92,7 @@ public class HomeFragment extends Fragment {
                 Log.i(TAG, "done: number of posts = " + posts.size());
 
                 adapter.clear();
-                List<Post> post = new ArrayList<>();
-                post.add(posts.get(testingRefresh));
-                adapter.addAll(post);
+                adapter.addAll(posts);
             }
         });
 
