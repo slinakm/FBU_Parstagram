@@ -27,7 +27,6 @@ public class ProfileFragment extends Fragment {
     private ProfileViewModel notificationsViewModel;
     private FragmentProfileBinding binding;
 
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         notificationsViewModel =
