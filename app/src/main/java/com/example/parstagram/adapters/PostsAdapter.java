@@ -70,20 +70,21 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             super(binding.getRoot());
             this.binding = binding;
 
-            binding.ivPostImage.setOnClickListener(new photoOnClickListener());
         }
 
-        private class photoOnClickListener implements View.OnClickListener {
 
-            @Override
-            public void onClick(View view) {
-                FragmentManager fm = fragment.getChildFragmentManager();
-                DetailsFragment editNameDialogFragment = DetailsFragment.newInstance("Some Title");
-                editNameDialogFragment.show(fm, "fragment_edit_name");
-            }
-        }
 
-        private void bind(Post post) {
+        private void bind(final Post post) {
+
+            binding.ivPostImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    FragmentManager fm = fragment.getChildFragmentManager();
+                    DetailsFragment editNameDialogFragment = DetailsFragment.newInstance(post);
+                    editNameDialogFragment.show(fm, "fragment_edit_name");
+                }
+            });
+
             String username = post.getUser().getUsername();
             binding.tvUsername1.setText(username);
             binding.tvUsername2.setText(username);

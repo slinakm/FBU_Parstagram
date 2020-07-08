@@ -81,7 +81,7 @@ public class HomeFragment extends Fragment {
 
     private void queryPosts() {
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
-        query.orderByAscending("createdAt");
+        query.orderByDescending(Post.KEY_CREATEDAT);
         query.include(Post.KEY_USER);
         query.setLimit(MAXIMUM_POSTS);
         query.findInBackground(new FindCallback<Post>() {

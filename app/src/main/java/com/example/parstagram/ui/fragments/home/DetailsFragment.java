@@ -12,20 +12,24 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.parstagram.databinding.FragmentDetailsBinding;
+import com.example.parstagram.models.Post;
+
+import java.util.Date;
 
 public class DetailsFragment extends DialogFragment {
 
     FragmentDetailsBinding binding;
+    Post post;
 
     /**
      * Empty constructor required for DialogFragment
      */
     public DetailsFragment () { }
 
-    public static DetailsFragment newInstance(String title) {
+    public static DetailsFragment newInstance(Post post) {
         DetailsFragment frag = new DetailsFragment();
         Bundle args = new Bundle();
-        args.putString("title", title);
+        args.putParcelable(Post.TAG, post);
         frag.setArguments(args);
         return frag;
     }
@@ -42,13 +46,14 @@ public class DetailsFragment extends DialogFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // Get field from view
-        EditText mEditText = binding.txtYourName
-        // Fetch arguments from bundle and set title
-        String title = getArguments().getString("title", "Enter Name");
-        getDialog().setTitle(title);
-        // Show soft keyboard automatically and request focus to field
-        mEditText.requestFocus();
+        Post p = (Post) getArguments().get(Post.TAG);
+        binding.tvDescription.setText(p.getDescription());
+        binding.tvUsername.setText(p.getUser().getUsername());
+        Date date = p.getCreatedAt();
+        if (date != null) {
+            binding.tvTimestamp.setText(date.toString());
+        }
+
         getDialog().getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
     }
