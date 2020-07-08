@@ -55,7 +55,7 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         rvPosts = binding.rvPosts;
-        adapter = new PostsAdapter(getActivity(), allPosts);
+        adapter = new PostsAdapter(getActivity(), this, allPosts);
 
         rvPosts.setAdapter(adapter);
         rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));

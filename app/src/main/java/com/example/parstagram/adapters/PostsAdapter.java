@@ -7,11 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.parstagram.databinding.ItemPostBinding;
 import com.example.parstagram.models.Post;
+import com.example.parstagram.ui.fragments.home.DetailsFragment;
 import com.parse.ParseFile;
 
 import java.util.ArrayList;
@@ -21,10 +24,12 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
     private static final String TAG = PostsAdapter.class.getSimpleName();
     private static Activity context;
+    private static Fragment fragment;
     private List<Post> posts;
 
-    public PostsAdapter(Activity context, List<Post> posts) {
+    public PostsAdapter(Activity context, Fragment fragment, List<Post> posts) {
         PostsAdapter.context = context;
+        PostsAdapter.fragment = fragment;
         this.posts = posts;
     }
 
@@ -64,6 +69,18 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         private ViewHolder(@NonNull ItemPostBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+
+            binding.ivPostImage.setOnClickListener(new photoOnClickListener());
+        }
+
+        private class photoOnClickListener implements View.OnClickListener {
+
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = fragment.getChildFragmentManager();
+                DetailsFragment editNameDialogFragment = DetailsFragment.newInstance("Some Title");
+                editNameDialogFragment.show(fm, "fragment_edit_name");
+            }
         }
 
         private void bind(Post post) {
