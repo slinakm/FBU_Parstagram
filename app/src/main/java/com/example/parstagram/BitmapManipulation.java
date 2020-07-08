@@ -124,9 +124,9 @@ public class BitmapManipulation {
     }
 
 
-    public static void launchCamera(Activity context, String photoFileName, File photoFile, String TAG) {
+    public static File launchCamera(Activity context, String photoFileName, String TAG) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        photoFile = getPhotoFileUri(context, photoFileName, TAG);
+        File photoFile = getPhotoFileUri(context, photoFileName, TAG);
 
         Uri fileProvider = FileProvider.getUriForFile(context,
                 "com.codepath.fileprovider.Parstagram", photoFile);
@@ -135,6 +135,8 @@ public class BitmapManipulation {
         if (intent.resolveActivity(context.getPackageManager()) != null) {
             context.startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
         }
+
+        return photoFile;
     }
 
     public static File getPhotoFileUri(Context context, String fileName, String TAG) {

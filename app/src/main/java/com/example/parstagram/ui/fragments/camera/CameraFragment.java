@@ -82,8 +82,9 @@ public class CameraFragment extends Fragment {
     private class cameraOnClickListener implements View.OnClickListener {
         public void onClick(View view) {
             Log.i(TAG, "onClick: camera button was clicked by user");
-            BitmapManipulation.launchCamera(CameraFragment.this.getActivity(),
-                    photoFileName, photoFile, TAG);
+            photoFile =
+                    BitmapManipulation.launchCamera(CameraFragment.this.getActivity(),
+                    photoFileName, TAG);
         }
     }
 
