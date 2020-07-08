@@ -19,7 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.parstagram.BitmapScaler;
+import com.example.parstagram.BitmapManipulation;
 import com.example.parstagram.models.Post;
 import com.example.parstagram.R;
 import com.example.parstagram.databinding.FragmentCameraBinding;
@@ -120,7 +120,7 @@ public class CameraFragment extends Fragment {
             if (resultCode == RESULT_OK) {
                 Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
 
-                Bitmap resizedBitmap = BitmapScaler.scaleToFitWidth(takenImage,
+                Bitmap resizedBitmap = BitmapManipulation.scaleToFitWidth(takenImage,
                         (int) getResources().getDimension((R.dimen.resized_post_image)));
 
                 binding.ivPost.setImageBitmap(resizedBitmap);
