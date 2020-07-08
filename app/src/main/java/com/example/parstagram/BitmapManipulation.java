@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.core.content.FileProvider;
 import androidx.exifinterface.media.ExifInterface;
+import androidx.fragment.app.Fragment;
 
 import com.example.parstagram.ui.fragments.camera.CameraFragment;
 
@@ -124,7 +125,7 @@ public class BitmapManipulation {
     }
 
 
-    public static File launchCamera(Activity context, String photoFileName, String TAG) {
+    public static File launchCamera(Activity context, Fragment fragment, String photoFileName, String TAG) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         File photoFile = getPhotoFileUri(context, photoFileName, TAG);
 
@@ -133,7 +134,7 @@ public class BitmapManipulation {
         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
 
         if (intent.resolveActivity(context.getPackageManager()) != null) {
-            context.startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+            fragment.startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
         }
 
         return photoFile;

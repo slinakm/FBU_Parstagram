@@ -83,7 +83,7 @@ public class CameraFragment extends Fragment {
         public void onClick(View view) {
             Log.i(TAG, "onClick: camera button was clicked by user");
             photoFile =
-                    BitmapManipulation.launchCamera(CameraFragment.this.getActivity(),
+                    BitmapManipulation.launchCamera(CameraFragment.this.getActivity(), CameraFragment.this,
                     photoFileName, TAG);
         }
     }
@@ -91,7 +91,7 @@ public class CameraFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+        Log.i(TAG, "onActivityResult: here!");
         if (requestCode == BitmapManipulation.CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
             Log.d(TAG, "onActivityResult: picture taken");
             if (resultCode == RESULT_OK) {
