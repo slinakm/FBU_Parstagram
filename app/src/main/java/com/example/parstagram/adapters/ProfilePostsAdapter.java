@@ -1,7 +1,6 @@
 package com.example.parstagram.adapters;
 
 import android.app.Activity;
-import android.content.Context;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,31 +13,31 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.example.parstagram.databinding.ItemPostBinding;
+import com.example.parstagram.databinding.ItemProfilePostBinding;
 import com.example.parstagram.models.Post;
 import com.example.parstagram.ui.fragments.home.DetailsFragment;
 import com.example.parstagram.ui.fragments.profile.ProfileFragment;
 import com.parse.ParseFile;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
+public class ProfilePostsAdapter extends RecyclerView.Adapter<ProfilePostsAdapter.ViewHolder> {
 
     private static final String TAG = PostsAdapter.class.getSimpleName();
     private static Activity context;
     private static Fragment fragment;
     private List<Post> posts;
 
-    public PostsAdapter(Activity context, Fragment fragment, List<Post> posts) {
-        PostsAdapter.context = context;
-        PostsAdapter.fragment = fragment;
+    public ProfilePostsAdapter(Activity context, Fragment fragment, List<Post> posts) {
+        ProfilePostsAdapter.context = context;
+        ProfilePostsAdapter.fragment = fragment;
         this.posts = posts;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Log.i(TAG, "onCreateViewHolder: ");
-        ItemPostBinding binding = ItemPostBinding.inflate(context.getLayoutInflater(), parent, false);
+        ItemProfilePostBinding binding = ItemProfilePostBinding.inflate(context.getLayoutInflater(), parent, false);
         return new ViewHolder(binding);
     }
 
@@ -66,9 +65,9 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
     }
 
     protected static class ViewHolder extends RecyclerView.ViewHolder {
-        ItemPostBinding binding;
+        ItemProfilePostBinding binding;
 
-        private ViewHolder(@NonNull ItemPostBinding binding) {
+        private ViewHolder(@NonNull ItemProfilePostBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
 
@@ -85,12 +84,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 }
             });
 
-            String username = post.getUser().getUsername();
-            binding.tvUsername1.setText(username);
-            binding.tvUsername2.setText(username);
-            binding.tvRelTime.setText(post.getRelativeTime());
-
-            binding.tvDescription.setText(post.getDescription());
 
             ParseFile image = post.getImage();
             if (image != null) {
@@ -98,13 +91,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             }
 
             ParseFile profilePic = post.getUser().getParseFile(ProfileFragment.KEY_PROFILEPIC);
-            Log.d(TAG, "bind: " + profilePic);
-            if (profilePic != null) {
-                Glide.with(context).
-                        load(profilePic.getUrl()).
-                        transform(new CircleCrop()).
-                        into(binding.ivProfilePic);
-            }
         }
     }
 }
+

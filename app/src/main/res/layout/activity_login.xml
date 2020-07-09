@@ -49,11 +49,10 @@
         android:id="@+id/btnSignup"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/login_between_margins"
         android:backgroundTint="@color/colorBtnSignUp"
         android:text="@string/signUpButton"
         android:textColor="@color/colorTextBtn"
         app:layout_constraintEnd_toEndOf="@+id/etPassword"
         app:layout_constraintStart_toStartOf="@+id/etPassword"
-        app:layout_constraintTop_toBottomOf="@+id/btnLogout" />
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 </androidx.constraintlayout.widget.ConstraintLayout>

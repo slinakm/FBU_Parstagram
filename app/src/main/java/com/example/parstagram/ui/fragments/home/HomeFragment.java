@@ -35,12 +35,12 @@ public class HomeFragment extends Fragment {
     private static final String TAG = HomeFragment.class.getSimpleName();
     private static final int MAXIMUM_POSTS = 20;
 
+    private final List<Post> allPosts = new ArrayList<>();
+
     private HomeViewModel homeViewModel;
     private FragmentHomeBinding binding;
-
     private RecyclerView rvPosts;
     private PostsAdapter adapter;
-    private final List<Post> allPosts = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
