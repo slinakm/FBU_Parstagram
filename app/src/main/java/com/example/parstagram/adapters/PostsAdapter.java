@@ -72,8 +72,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
         }
 
-
-
         private void bind(final Post post) {
 
             binding.ivPostImage.setOnClickListener(new View.OnClickListener() {
