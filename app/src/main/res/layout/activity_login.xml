@@ -55,5 +55,5 @@
         android:textColor="@color/colorTextBtn"
         app:layout_constraintEnd_toEndOf="@+id/etPassword"
         app:layout_constraintStart_toStartOf="@+id/etPassword"
-        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/btnLogout" />
 </androidx.constraintlayout.widget.ConstraintLayout>

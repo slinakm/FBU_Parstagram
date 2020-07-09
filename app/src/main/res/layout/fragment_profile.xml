@@ -2,19 +2,40 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="244dp"
-        android:layout_height="42dp"
+        android:id="@+id/btnLogout"
+        android:layout_width="136dp"
+        android:layout_height="52dp"
         android:backgroundTint="@color/colorBtn"
         android:text="@string/logOutButton"
         android:textColor="@color/colorTextBtn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/ivBigProfilePic"
+        app:layout_constraintStart_toStartOf="@+id/tvUsername" />
+
+    <ImageView
+        android:id="@+id/ivBigProfilePic"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/instagram_user_outline_24"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@drawable/instagram_user_outline_24" />
+
+    <TextView
+        android:id="@+id/tvUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="13dp"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/ivBigProfilePic"
+        app:layout_constraintTop_toTopOf="@+id/ivBigProfilePic"
+        tools:text="@string/username" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
