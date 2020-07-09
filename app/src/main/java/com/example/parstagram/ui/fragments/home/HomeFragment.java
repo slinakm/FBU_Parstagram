@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.parstagram.BitmapManipulation;
+import com.example.parstagram.EndlessRecyclerViewScrollListener;
 import com.example.parstagram.adapters.PostsAdapter;
 import com.example.parstagram.models.Post;
 import com.example.parstagram.databinding.FragmentHomeBinding;
@@ -57,12 +58,27 @@ public class HomeFragment extends Fragment {
         rvPosts = binding.rvPosts;
         adapter = new PostsAdapter(getActivity(), this, allPosts);
 
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+
         rvPosts.setAdapter(adapter);
-        rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvPosts.setLayoutManager(layoutManager);
+        rvPosts.setOnScrollListener(new postsOnScrollListener(layoutManager));
 
         binding.swipeContainer.setOnRefreshListener(new
                 swipeRefreshListener(binding.swipeContainer));
         queryPosts();
+    }
+
+    private class postsOnScrollListener extends EndlessRecyclerViewScrollListener {
+        public postsOnScrollListener(LinearLayoutManager layoutManager) {
+            super(layoutManager);
+        }
+
+        @Override
+        public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+            adapter.clear();
+            queryPosts();
+        }
     }
 
     private class swipeRefreshListener implements SwipeRefreshLayout.OnRefreshListener {

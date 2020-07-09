@@ -30,10 +30,6 @@ public class Post extends ParseObject {
         put(KEY_USER, user);
     }
 
-    public void putDate(Date date) {
-        put(KEY_CREATEDAT, date);
-    }
-
     public String getDescription() {
         return getString(KEY_DESCRIPTION);
     }
