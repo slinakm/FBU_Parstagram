@@ -26,6 +26,7 @@ import com.example.parstagram.models.Post;
 import com.example.parstagram.ui.fragments.profile.ProfileViewModel;
 import com.example.parstagram.ui.login.LoginActivity;
 import com.parse.FindCallback;
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseQuery;
@@ -51,6 +52,16 @@ public class UserProfileFragment extends Fragment {
     private File photoFile;
     private String photoFileName;
 
+    public static UserProfileFragment newInstance(ParseUser user) {
+
+        Bundle args = new Bundle();
+        args.putParcelable(ParseUser.class.getSimpleName(), user);
+
+        UserProfileFragment fragment = new UserProfileFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         notificationsViewModel =
@@ -63,7 +74,8 @@ public class UserProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        user = ParseUser.getCurrentUser();
+        user = (ParseUser) getArguments().get(ParseUser.class.getSimpleName());
+
         photoFileName = user.getUsername() + ".jpg";
 
         binding.btnLogout.setVisibility(View.GONE);

@@ -24,12 +24,6 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.custom_action_bar);
 
-//        ab.setDisplayShowTitleEnabled(false);
-//        ab.setDisplayUseLogoEnabled(true);
-//        ab.setDisplayShowHomeEnabled(true);
-//
-//        ab.setIcon(R.drawable.nav_logo_whiteout);
-
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.

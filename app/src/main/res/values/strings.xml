@@ -32,4 +32,5 @@
     <string name="description">Description: </string>
     <string name="usernamecolon">Username: </string>
     <string name="timestamp">Timestamp: </string>
+    <string name="choose_picture_from_library">Choose Picture from Library</string>
 </resources>

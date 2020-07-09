@@ -46,10 +46,10 @@ public class DetailsFragment extends DialogFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Post p = (Post) getArguments().get(Post.TAG);
-        binding.tvDescription.setText(p.getDescription());
-        binding.tvUsername.setText(p.getUser().getUsername());
-        Date date = p.getCreatedAt();
+        post = (Post) getArguments().get(Post.TAG);
+        binding.tvDescription.setText(post.getDescription());
+        binding.tvUsername.setText(post.getUser().getUsername());
+        Date date = post.getCreatedAt();
         if (date != null) {
             binding.tvTimestamp.setText(date.toString());
         }

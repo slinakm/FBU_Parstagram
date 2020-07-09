@@ -17,6 +17,17 @@
         app:layout_constraintStart_toStartOf="@+id/etDesc"
         app:layout_constraintTop_toBottomOf="@+id/etDesc" />
 
+    <Button
+        android:id="@+id/btnLibrary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@color/colorBtn"
+        android:text="@string/choose_picture_from_library"
+        android:textColor="@color/colorTextBtn"
+        app:layout_constraintStart_toStartOf="@+id/etDesc"
+        app:layout_constraintTop_toBottomOf="@+id/btnCamera" />
+
     <EditText
         android:id="@+id/etDesc"
         android:layout_width="wrap_content"
@@ -33,12 +44,12 @@
         android:id="@+id/btnSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="32dp"
         android:backgroundTint="@color/colorBtn"
         android:text="@string/submit"
         android:textColor="@color/colorTextBtn"
         app:layout_constraintStart_toStartOf="@+id/etDesc"
-        app:layout_constraintTop_toBottomOf="@+id/ivPost" />
+        app:layout_constraintTop_toBottomOf="@+id/btnLibrary" />
 
     <ImageView
         android:id="@+id/ivPost"
