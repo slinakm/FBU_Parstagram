@@ -8,6 +8,8 @@ import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+import org.parceler.Parcel;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Locale;
 
+@Parcel
 @ParseClassName("Post")
 public class Post extends ParseObject {
 
