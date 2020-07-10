@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -66,32 +67,15 @@ public class CameraFragment extends Fragment {
 
         binding.btnSubmit.setOnClickListener(new postSubmissionOnClickListener());
         binding.btnCamera.setOnClickListener(new cameraOnClickListener());
+        binding.btnLibrary.setOnClickListener(new libraryOnClickListener());
     }
 
-    private class descObserver implements Observer<String> {
-        @Override
-        public void onChanged(@Nullable String s) {
-            desc = s;
-            binding.etDesc.setText(desc);
-        }
-    }
-
-    /**
-     *   onClickListener and helper methods to launch camera
-     * */
-    private class cameraOnClickListener implements View.OnClickListener {
-        public void onClick(View view) {
-            Log.i(TAG, "onClick: camera button was clicked by user");
-            photoFile =
-                    BitmapManipulation.launchCamera(CameraFragment.this.getActivity(), CameraFragment.this,
-                    photoFileName, TAG);
-        }
-    }
-
+    //TODO: Clean up the code
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Log.i(TAG, "onActivityResult: here!");
+
         if (requestCode == BitmapManipulation.CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
             Log.d(TAG, "onActivityResult: picture taken");
             if (resultCode == RESULT_OK) {
@@ -103,16 +87,69 @@ public class CameraFragment extends Fragment {
                 binding.ivPost.setImageBitmap(resizedBitmap);
                 binding.ivPost.setVisibility(View.VISIBLE);
                 binding.btnCamera.setVisibility(View.GONE);
+                binding.btnLibrary.setVisibility(View.GONE);
 
                 photoFile =
                         BitmapManipulation.writeResizedBitmap(getContext(), photoFileName,
-                        resizedBitmap, "resized", TAG);
+                                resizedBitmap, "resized", TAG);
             } else {
                 Toast.makeText(getContext(), getString(R.string.toast_camera_err),
                         Toast.LENGTH_SHORT).show();
             }
         }
+
+        if ((data != null) && requestCode == BitmapManipulation.PICK_PHOTO_CODE) {
+            Uri photoUri = data.getData();
+
+            // Load the image located at photoUri into selectedImage
+            Bitmap selectedImage = BitmapManipulation.loadFromUri(getContext(), photoUri);
+
+            Bitmap resizedBitmap = BitmapManipulation.scaleToFitWidth(selectedImage,
+                    (int) getResources().getDimension((R.dimen.resized_post_image)));
+
+            photoFile =
+                    BitmapManipulation.writeResizedBitmap(getContext(), photoFileName,
+                            resizedBitmap, "resized", TAG);
+
+            // Load the selected image into a preview
+            binding.ivPost.setImageBitmap(selectedImage);
+            binding.ivPost.setVisibility(View.VISIBLE);
+            binding.btnCamera.setVisibility(View.GONE);
+            binding.btnLibrary.setVisibility(View.GONE);
+        }
     }
+
+    private class descObserver implements Observer<String> {
+        @Override
+        public void onChanged(@Nullable String s) {
+            desc = s;
+            binding.etDesc.setText(desc);
+        }
+    }
+
+    /**
+     *    onClickListener to open library media
+     */
+    private class libraryOnClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            Log.i(TAG, "onClick: library button was clicked by user");
+            BitmapManipulation.onPickPhoto(getContext(), CameraFragment.this);
+        }
+    }
+
+    /**
+     *   onClickListener to open camera
+     * */
+    private class cameraOnClickListener implements View.OnClickListener {
+        public void onClick(View view) {
+            Log.i(TAG, "onClick: camera button was clicked by user");
+            photoFile =
+                    BitmapManipulation.launchCamera(CameraFragment.this.getActivity(), CameraFragment.this,
+                    photoFileName, TAG);
+        }
+    }
+
 
     /**
      *   OnClickListener and helper methods to submit post

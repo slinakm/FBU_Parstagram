@@ -176,48 +176,35 @@ public class BitmapManipulation {
         return resizedFile;
     }
 
-//    public void onPickPhoto(View view, Fragment fragment) {
-//        // Create intent for picking a photo from the gallery
-//        Intent intent = new Intent(Intent.ACTION_PICK,
-//                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//
-//        // If you call startActivityForResult() using an intent that no app can handle, your app will crash.
-//        // So as long as the result is not null, it's safe to use the intent.
-//        if (intent.resolveActivity(fragment.getPackageManager()) != null) {
-//            // Bring up gallery to select a photo
-//            fragment.startActivityForResult(intent, PICK_PHOTO_CODE);
-//        }
-//    }
-//
-//    public Bitmap loadFromUri(Uri photoUri, Fragment fragment) {
-//        Bitmap image = null;
-//        try {
-//            // check version of Android on device
-//            if(Build.VERSION.SDK_INT > 27){
-//                // on newer versions of Android, use the new decodeBitmap method
-//                ImageDecoder.Source source = ImageDecoder.createSource(fragment.getContentResolver(), photoUri);
-//                image = ImageDecoder.decodeBitmap(source);
-//            } else {
-//                // support older versions of Android by using getBitmap
-//                image = MediaStore.Images.Media.getBitmap(this.getContentResolver(), photoUri);
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return image;
-//    }
-//
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        if ((data != null) && requestCode == PICK_PHOTO_CODE) {
-//            Uri photoUri = data.getData();
-//
-//            // Load the image located at photoUri into selectedImage
-//            Bitmap selectedImage = loadFromUri(photoUri);
-//
-//            // Load the selected image into a preview
-//            ImageView ivPreview = (ImageView) findViewById(R.id.ivPreview);
-//            ivPreview.setImageBitmap(selectedImage);
-//        }
-//    }
+    public static void onPickPhoto(Context context, Fragment fragment) {
+        // Create intent for picking a photo from the gallery
+        Intent intent = new Intent(Intent.ACTION_PICK,
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+        // If you call startActivityForResult() using an intent that no app can handle, your app will crash.
+        // So as long as the result is not null, it's safe to use the intent.
+        if (intent.resolveActivity(context.getPackageManager()) != null) {
+            // Bring up gallery to select a photo
+            fragment.startActivityForResult(intent, PICK_PHOTO_CODE);
+        }
+    }
+
+    public static Bitmap loadFromUri(Context context, Uri photoUri) {
+        Bitmap image = null;
+        try {
+            // check version of Android on device
+            if(Build.VERSION.SDK_INT > 27){
+                // on newer versions of Android, use the new decodeBitmap method
+                ImageDecoder.Source source = ImageDecoder.createSource(context.getContentResolver(), photoUri);
+                image = ImageDecoder.decodeBitmap(source);
+            } else {
+                // support older versions of Android by using getBitmap
+                image = MediaStore.Images.Media.getBitmap(context.getContentResolver(), photoUri);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return image;
+    }
+
 }

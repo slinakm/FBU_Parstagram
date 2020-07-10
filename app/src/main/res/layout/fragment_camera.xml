@@ -10,12 +10,12 @@
         android:id="@+id/btnCamera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
         android:backgroundTint="@color/colorBtn"
         android:text="@string/take_picture"
         android:textColor="@color/colorTextBtn"
+        android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="@+id/etDesc"
-        app:layout_constraintTop_toBottomOf="@+id/etDesc" />
+        app:layout_constraintTop_toBottomOf="@+id/ivPost" />
 
     <Button
         android:id="@+id/btnLibrary"
@@ -57,7 +57,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="52dp"
         app:layout_constraintStart_toStartOf="@+id/btnCamera"
-        app:layout_constraintTop_toTopOf="@+id/btnCamera"
+        app:layout_constraintTop_toBottomOf="@+id/etDesc"
         tools:src="@tools:sample/avatars" />
 </androidx.constraintlayout.widget.ConstraintLayout>
