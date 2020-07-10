@@ -76,24 +76,22 @@
 
     <ImageView
         android:id="@+id/ivLike"
-        android:src="@drawable/ufi_heart"
+        android:src="@drawable/heart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         app:layout_constraintStart_toStartOf="@+id/tvUsername2"
-        app:layout_constraintTop_toBottomOf="@+id/ivPostImage"
-        app:srcCompat="@drawable/ufi_heart" />
+        app:layout_constraintTop_toBottomOf="@+id/ivPostImage"/>
 
     <ImageView
         android:id="@+id/ivComment"
-        android:src="@drawable/ufi_comment"
+        android:src="@drawable/comment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="2dp"
         app:layout_constraintStart_toEndOf="@+id/ivLike"
-        app:layout_constraintTop_toBottomOf="@+id/ivPostImage"
-        app:srcCompat="@drawable/ufi_heart" />
+        app:layout_constraintTop_toBottomOf="@+id/ivPostImage" />
 
     <ImageView
         android:id="@+id/ivShare"
@@ -103,18 +101,16 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="2dp"
         app:layout_constraintStart_toEndOf="@+id/ivComment"
-        app:layout_constraintTop_toBottomOf="@+id/ivPostImage"
-        app:srcCompat="@drawable/ufi_heart" />
+        app:layout_constraintTop_toBottomOf="@+id/ivPostImage"/>
 
     <ImageView
         android:id="@+id/ivSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
-        android:src="@drawable/ufi_save"
+        android:src="@drawable/saved"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/ivShare"
-        app:srcCompat="@drawable/ufi_heart" />
+        app:layout_constraintTop_toTopOf="@+id/ivShare"/>
 
     <ImageView
         android:id="@+id/ivMore"
@@ -123,7 +119,7 @@
         android:layout_marginBottom="7dp"
         app:layout_constraintBottom_toTopOf="@+id/ivPostImage"
         app:layout_constraintEnd_toEndOf="@+id/ivSave"
-        app:srcCompat="@drawable/ufi_more" />
+        android:src="@drawable/ufi_more" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

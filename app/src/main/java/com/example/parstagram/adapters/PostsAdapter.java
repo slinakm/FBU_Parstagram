@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -89,6 +90,12 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             binding.tvUsername2.setText(username);
             binding.tvRelTime.setText(post.getRelativeTime());
 
+            if (post.isLiked()) {
+                binding.ivLike.setActivated(true);
+            } else {
+                binding.ivLike.setActivated(false);
+            }
+
             binding.tvDescription.setText(post.getDescription());
 
             ParseFile image = post.getImage();
@@ -118,14 +125,13 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                     // Replace the content of the container
                     fts.replace(R.id.nav_host_fragment,userProfileFragment);
                     // Append this transaction to the backstack
-                    fts.addToBackStack("optional tag");
+                    fts.addToBackStack(UserProfileFragment.class.getSimpleName());
                     // Commit the changes
                     fts.commit();
                 }
             }
 
             binding.tvUsername1.setOnClickListener(new userOnClickListener());
-            binding.tvUsername2.setOnClickListener(new userOnClickListener());
             binding.ivProfilePic.setOnClickListener(new userOnClickListener());
 
             binding.ivPostImage.setOnClickListener(new View.OnClickListener() {
@@ -137,6 +143,42 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 }
             });
 
+            class likeOnClickListener implements View.OnClickListener {
+                @Override
+                public void onClick(View view) {
+                    final boolean isActivated = !binding.ivLike.isActivated();
+
+                    if (isActivated) {
+                        likePost(post);
+                    } else {
+                        unlikePost(post);
+                    }
+                }
+            }
+            binding.ivLike.setOnClickListener(new likeOnClickListener());
+
+            class savedOnClickListener implements View.OnClickListener {
+                @Override
+                public void onClick(View view) {
+                    final boolean isActivated = !binding.ivSave.isActivated();
+                    binding.ivSave.setActivated(isActivated);
+                }
+            }
+            binding.ivSave.setOnClickListener(new savedOnClickListener());
+
+        }
+
+        private void likePost(Post post) {
+            Log.d(TAG, "likePost: number before adding new like "
+                    + post.getLikes());
+            binding.ivLike.setActivated(true);
+            post.addLike();
+        }
+
+        private void unlikePost(Post post) {
+            Log.d(TAG, "likePost: number before removing like " + post.getLikes());
+            binding.ivLike.setActivated(false);
+            post.unlike();
         }
     }
 

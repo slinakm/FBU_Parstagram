@@ -49,6 +49,8 @@ public class DetailsFragment extends DialogFragment {
         post = (Post) getArguments().get(Post.TAG);
         binding.tvDescription.setText(post.getDescription());
         binding.tvUsername.setText(post.getUser().getUsername());
+        binding.tvLikes.setText(String.format("%d", post.getLikes()));
+
         Date date = post.getCreatedAt();
         if (date != null) {
             binding.tvTimestamp.setText(date.toString());

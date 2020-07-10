@@ -74,5 +74,47 @@
             app:layout_constraintTop_toTopOf="@id/tvTimestampTag"
             tools:text="timestamp" />
 
+        <TextView
+            android:id="@+id/tvLikesTag"
+            android:text="@string/number_of_likes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="4dp"
+            app:layout_constraintTop_toBottomOf="@id/tvTimestampTag"
+            android:textColor="@color/text_primary"/>
+
+        <TextView
+            android:id="@+id/tvLikes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:textColor="@color/text_secondary"
+            android:paddingStart="5dp"
+            app:layout_constraintStart_toEndOf="@id/tvLikesTag"
+            app:layout_constraintTop_toTopOf="@id/tvLikesTag"
+            tools:text="likes" />
+
+        <TextView
+            android:id="@+id/tvCommentsTag"
+            android:text="@string/number_of_comments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="4dp"
+            app:layout_constraintTop_toBottomOf="@id/tvLikesTag"
+            android:textColor="@color/text_primary"/>
+
+        <TextView
+            android:id="@+id/tvComments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:textColor="@color/text_secondary"
+            android:paddingStart="5dp"
+            app:layout_constraintStart_toEndOf="@id/tvCommentsTag"
+            app:layout_constraintTop_toTopOf="@id/tvCommentsTag"
+            tools:text="comments" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
