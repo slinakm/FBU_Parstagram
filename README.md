@@ -45,9 +45,12 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 ## Video Walkthrough
 
-Here's a walkthrough of implemented user stories:
+Here's a walkthrough of implemented user stories: the last two are mp4 files because the gif files of the videos were too large. I also set up a Dropbox link with the password "codepath". 
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://www.dropbox.com/home?preview=parstagram_small.gif' title='Video Walkthrough' width='' alt='https://www.dropbox.com/home?preview=parstagram_small.gif' />
+
+<img src='https://github.com/slinakm/FBU_Parstagram/blob/master/gifs/parstagram_full.mp4' title='Video Walkthrough' width='' alt='https://github.com/slinakm/FBU_Parstagram/blob/master/gifs/parstagram_full.mp4' />
+<img src='https://github.com/slinakm/FBU_Parstagram/blob/master/gifs/parstagram_persistence.mp4' title='Video Walkthrough' width='' alt='https://github.com/slinakm/FBU_Parstagram/blob/master/gifs/parstagram_persistence.mp4' />
 
 GIF created with [Kap](https://getkap.co/).
 
