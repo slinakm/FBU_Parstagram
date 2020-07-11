@@ -37,10 +37,11 @@ The following **additional** features are implemented:
 
 - [x] Implemented ViewModel for Camera fragment (which adds new posts) so that information is not lost from configuration changes.
 - [x] Implemented a DialogFrament to show post details when user clicks on post image.
+
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1.
-2.
+1. Set up a custom gallery so that we can select multiple images.
+2. Set up notification so that users can be notified of new likes and comments.
 
 ## Video Walkthrough
 
