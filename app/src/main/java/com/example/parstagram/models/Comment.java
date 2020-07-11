@@ -17,7 +17,7 @@ public class Comment extends ParseObject {
     // Set up empty constructor to register as ParseObject subclass
     public Comment(){}
 
-    public Comment(ParseUser user, Post post, String content) {
+    public Comment(Post post, ParseUser user, String content) {
         put(KEY_USER, user);
         put(KEY_POST, post);
         put(KEY_CONTENT, content);

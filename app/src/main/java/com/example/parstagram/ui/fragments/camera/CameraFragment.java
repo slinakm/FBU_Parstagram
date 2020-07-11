@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -162,6 +163,8 @@ public class CameraFragment extends Fragment {
     }
 
     private void checkPostable(){
+        binding.pbLoading.setVisibility(ProgressBar.VISIBLE);
+
         Log.d(TAG, "checkPostable: description =" + desc);
         Log.d(TAG, "checkPostable: get size of image" + photoFile.getTotalSpace());
         desc = binding.etDesc.getText().toString();
@@ -185,6 +188,8 @@ public class CameraFragment extends Fragment {
         post.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
+                binding.pbLoading.setVisibility(ProgressBar.INVISIBLE);
+
                 if (e != null) {
                     Log.e(TAG, "done: Error while saving post", e);
                     Toast.makeText(getContext(), getString(R.string.toast_save_err),

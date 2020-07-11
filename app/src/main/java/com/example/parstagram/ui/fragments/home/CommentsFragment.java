@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.example.parstagram.R;
 import com.example.parstagram.adapters.CommentsAdapter;
 import com.example.parstagram.adapters.PostsAdapter;
 import com.example.parstagram.databinding.FragmentCommentsBinding;
@@ -24,10 +26,12 @@ import com.example.parstagram.models.Post;
 import com.example.parstagram.ui.fragments.profile.ProfileFragment;
 import com.example.parstagram.ui.fragments.profile.ProfileViewModel;
 import com.parse.FindCallback;
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,6 +106,7 @@ public class CommentsFragment extends Fragment {
         binding.rvComments.setVisibility(View.INVISIBLE);
         binding.tvNoComments.setVisibility(View.VISIBLE);
 
+
         queryComments();
 
         // Set OnClickListeners
@@ -114,25 +119,65 @@ public class CommentsFragment extends Fragment {
             }
         }
         binding.ivPostImage.setOnClickListener(new imageOnClickListener());
+
+        class submitOnClickListener implements View.OnClickListener {
+            @Override
+            public void onClick(View view) {
+                final String content = binding.etComment.getText().toString();
+                Comment comment = new Comment(post, ParseUser.getCurrentUser(), content);
+                comment.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        if (e != null) {
+                            Log.e(TAG, "done: error saving comment" + content, e);
+                            Toast.makeText(getContext(), getString(R.string.error_saving_comment),
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            Log.i(TAG, "done: success saving comment: " + content);
+                            Toast.makeText(getContext(), getString(R.string.toast_save_succ),
+                                    Toast.LENGTH_SHORT).show();
+                            binding.etComment.setText("");
+
+                            adapter.clear();
+                            queryComments();
+                        }
+                    }
+                });
+            }
+        }
+        binding.btnSubmit.setOnClickListener(new submitOnClickListener());
     }
 
     private void queryComments() {
         ParseQuery<Comment> query = ParseQuery.getQuery(Comment.class);
         query.orderByDescending(Comment.KEY_CREATEDAT);
         query.include(Comment.KEY_POST);
+        query.whereEqualTo(Comment.KEY_POST, post);
         query.findInBackground(new FindCallback<Comment>() {
             @Override
             public void done(List<Comment> commentList, ParseException e) {
+
                 if (e != null) {
                     Log.e(TAG, "queryComments: Issue getting comments", e);
                 }
 
                 for (Comment c : commentList) {
-                    Log.i(TAG, "Comment:" + c.getContent()
-                            + ", User: " + c.getUser().getUsername());
+                    String name = "";
+                    try {
+                        name = c.getUser().fetchIfNeeded().getUsername();
+                    } catch (ParseException ex) {
+                        Log.v(TAG, ex.toString());
+                        ex.printStackTrace();
+                    }
+
+                    Log.i(TAG, "Comment:" + c.getContent() + " user: "
+                            + name);
                 }
 
-                Log.i(TAG, "done: number of contents = " + commentList.size());
+                Log.i(TAG, "done: number of comments = " + commentList.size());
+
+                adapter.clear();
+                adapter.addAll(commentList);
 
                 if (comments.size() == 0) {
                     binding.rvComments.setVisibility(View.INVISIBLE);
@@ -141,9 +186,6 @@ public class CommentsFragment extends Fragment {
                     binding.rvComments.setVisibility(View.VISIBLE);
                     binding.tvNoComments.setVisibility(View.GONE);
                 }
-
-                adapter.clear();
-                adapter.addAll(comments);
             }
         });
     }

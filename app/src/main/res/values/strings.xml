@@ -36,4 +36,5 @@
     <string name="number_of_comments">Number of Comments:</string>
     <string name="number_of_likes">Number of Likes:</string>
     <string name="there_are_no_comments_on_this_post">There are no comments on this post!</string>
+    <string name="error_saving_comment">Error saving comment</string>
 </resources>
