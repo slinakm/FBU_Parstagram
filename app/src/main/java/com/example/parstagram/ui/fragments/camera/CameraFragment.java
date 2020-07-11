@@ -115,8 +115,8 @@ public class CameraFragment extends Fragment {
             // Load the selected image into a preview
             binding.ivPost.setImageBitmap(selectedImage);
             binding.ivPost.setVisibility(View.VISIBLE);
-            binding.btnCamera.setVisibility(View.GONE);
-            binding.btnLibrary.setVisibility(View.GONE);
+//            binding.btnCamera.setVisibility(View.GONE);
+//            binding.btnLibrary.setVisibility(View.GONE);
         }
     }
 
@@ -172,10 +172,12 @@ public class CameraFragment extends Fragment {
         if (desc.isEmpty()) {
             Toast.makeText(getContext(),
                     R.string.toast_desc_empt, Toast.LENGTH_SHORT).show();
+            binding.pbLoading.setVisibility(ProgressBar.INVISIBLE);
         } else if (photoFile == null
                 || binding.ivPost.getDrawable() == null) {
             Toast.makeText(getContext(),
                     R.string.toast_img_empt, Toast.LENGTH_SHORT).show();
+            binding.pbLoading.setVisibility(ProgressBar.INVISIBLE);
         } else {
             ParseUser currUser = ParseUser.getCurrentUser();
             savePost(desc, photoFile, currUser);
@@ -208,6 +210,7 @@ public class CameraFragment extends Fragment {
         cameraViewModel.reset();
         binding.ivPost.setVisibility(View.GONE);
         binding.btnCamera.setVisibility(View.VISIBLE);
+        binding.btnLibrary.setVisibility(View.VISIBLE);
         photoFile = null;
     }
 

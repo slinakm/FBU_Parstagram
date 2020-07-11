@@ -50,8 +50,8 @@ public class DetailsFragment extends DialogFragment {
         binding.tvDescription.setText(post.getDescription());
         binding.tvUsername.setText(post.getUser().getUsername());
         binding.tvLikes.setText(String.format("%d", post.getLikes()));
-        binding.tvDescription.setVisibility(View.GONE);
-        binding.tvDescriptionTag.setVisibility(View.GONE);
+        binding.tvComments.setVisibility(View.GONE);
+        binding.tvCommentsTag.setVisibility(View.GONE);
 
         Date date = post.getCreatedAt();
         if (date != null) {
