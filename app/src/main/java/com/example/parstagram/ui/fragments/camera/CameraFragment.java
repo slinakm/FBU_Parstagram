@@ -87,8 +87,8 @@ public class CameraFragment extends Fragment {
 
                 binding.ivPost.setImageBitmap(resizedBitmap);
                 binding.ivPost.setVisibility(View.VISIBLE);
-                binding.btnCamera.setVisibility(View.GONE);
-                binding.btnLibrary.setVisibility(View.GONE);
+//                binding.btnCamera.setVisibility(View.GONE);
+//                binding.btnLibrary.setVisibility(View.GONE);
 
                 photoFile =
                         BitmapManipulation.writeResizedBitmap(getContext(), photoFileName,
