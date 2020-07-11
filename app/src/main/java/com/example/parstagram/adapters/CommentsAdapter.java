@@ -32,6 +32,13 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.ViewHo
     private static Fragment fragment;
     private List<Comment> comments;
 
+
+    public CommentsAdapter(Activity context, Fragment fragment, List<Comment> comments) {
+        this.context = context;
+        this.fragment = fragment;
+        this.comments = comments;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -50,6 +57,16 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.ViewHo
     @Override
     public int getItemCount() {
         return comments.size();
+    }
+
+    public void clear() {
+        comments.clear();
+        notifyDataSetChanged();
+    }
+
+    public void addAll(List<Comment> list) {
+        comments.addAll(list);
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

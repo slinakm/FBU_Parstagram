@@ -19,6 +19,7 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.example.parstagram.R;
 import com.example.parstagram.databinding.ItemPostBinding;
 import com.example.parstagram.models.Post;
+import com.example.parstagram.ui.fragments.home.CommentsFragment;
 import com.example.parstagram.ui.fragments.home.DetailsFragment;
 import com.example.parstagram.ui.fragments.home.UserProfileFragment;
 import com.example.parstagram.ui.fragments.profile.ProfileFragment;
@@ -130,18 +131,28 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                     fts.commit();
                 }
             }
-
             binding.tvUsername1.setOnClickListener(new userOnClickListener());
             binding.ivProfilePic.setOnClickListener(new userOnClickListener());
 
-            binding.ivPostImage.setOnClickListener(new View.OnClickListener() {
+            class commentOnClickListener implements View.OnClickListener {
                 @Override
                 public void onClick(View view) {
-                    FragmentManager fm = fragment.getChildFragmentManager();
-                    DetailsFragment detailsFragment = DetailsFragment.newInstance(post);
-                    detailsFragment.show(fm, DetailsFragment.class.getSimpleName());
+                    Log.d(TAG, "onClick: comment button clicked");
+                    FragmentManager fm = fragment.getParentFragmentManager();
+                    CommentsFragment commentsFragment =
+                            CommentsFragment.newInstance(post);
+
+                    FragmentTransaction fts = fm.beginTransaction();
+                    // Replace the content of the container
+                    fts.replace(R.id.nav_host_fragment,commentsFragment);
+                    // Append this transaction to the backstack
+                    fts.addToBackStack(CommentsFragment.class.getSimpleName());
+                    // Commit the changes
+                    fts.commit();
                 }
-            });
+            }
+            binding.ivPostImage.setOnClickListener(new commentOnClickListener());
+            binding.ivSave.setOnClickListener(new commentOnClickListener());
 
             class likeOnClickListener implements View.OnClickListener {
                 @Override
@@ -165,7 +176,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 }
             }
             binding.ivSave.setOnClickListener(new savedOnClickListener());
-
         }
 
         private void likePost(Post post) {

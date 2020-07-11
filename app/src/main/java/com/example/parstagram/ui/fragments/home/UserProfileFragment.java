@@ -44,7 +44,6 @@ public class UserProfileFragment extends Fragment {
 
     private final List<Post> allPosts = new ArrayList<>();
 
-    private ProfileViewModel notificationsViewModel;
     private FragmentProfileBinding binding;
     private static ParseUser user;
     private ProfilePostsAdapter adapter;
@@ -64,9 +63,6 @@ public class UserProfileFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        notificationsViewModel =
-                ViewModelProviders.of(this).get(ProfileViewModel.class);
-
         binding = FragmentProfileBinding.inflate(getLayoutInflater());
         return binding.getRoot();
     }
